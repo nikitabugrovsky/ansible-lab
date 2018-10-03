@@ -1,0 +1,26 @@
+---
+  plugins:
+    - 'vagrant-hosts'
+    - 'vagrant-cachier'
+  cache:
+    auto_detect: true
+  provider:
+    virtualbox:
+      vm:
+        cpu: 1
+        mem: 256
+        net: 'private_network'
+        box: 'centos/7'
+      nodes:
+        - 
+          name: 'ansible_master'
+          hostname: 'master'
+          ip: '10.0.0.10'          
+        - 
+          name: 'ansible_slave'
+          hostname: 'slave'
+          ip: '10.0.0.11'
+  provisioner:
+    - 
+      type: 'hosts'
+      sync_hosts: true
