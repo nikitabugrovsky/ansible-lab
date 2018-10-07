@@ -27,3 +27,17 @@ def vagrant_config(work_dir)
   end
   @options
 end
+
+def generate_ssh_keys(ssh_keys_dir, key_name)
+  unless File.file?(File.join(ssh_keys_dir, key_name))
+    system("ssh-keygen -f #{File.join(ssh_keys_dir, key_name)} -q -N '' -t rsa -C 'vagrant@control-node'")
+  end
+end
+
+def extract_worker_nodes(nodes_array)
+  workers = []
+  nodes_array.each do |node|
+    workers << node['name'] if node['name'] =~ /(\w+)-\d/
+  end
+  workers
+end

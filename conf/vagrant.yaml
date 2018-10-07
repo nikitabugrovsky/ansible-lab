@@ -13,10 +13,6 @@
         box: 'centos/7'
       nodes:
         - 
-          name: 'control-node'
-          hostname: 'control-node'
-          ip: '10.0.0.10'          
-        - 
           name: 'node-0'
           hostname: 'node-0'
           ip: '10.0.0.11'
@@ -24,10 +20,16 @@
           name: 'node-1'
           hostname: 'node-1'
           ip: '10.0.0.12'
+        - 
+          name: 'control-node'
+          hostname: 'control-node'
+          ip: '10.0.0.10'          
   provisioner:
     - 
       type: 'hosts'
       sync_hosts: true
     - 
       type: 'shell'
-
+    -
+      type: 'file'
+      
