@@ -41,7 +41,7 @@ function install_package() {
 function add_ansible_nodes() {
     for node in "${ANSIBLE_NODES[@]}"; do
         grep -q "$node" "$ANSIBLE_HOSTS_FILE" && \
-        (echo "$host is already added to $ANSIBLE_HOSTS_FILE"; exit 1) \
+        (echo "$node is already added to $ANSIBLE_HOSTS_FILE"; exit 0) \
         || echo "$node" >> "$ANSIBLE_HOSTS_FILE"
     done
 }
