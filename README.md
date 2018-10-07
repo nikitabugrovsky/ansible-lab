@@ -1,0 +1,17 @@
+# ansible-lab
+Ansible Lab: 3 nodes setup (control node + 2 workers) in Vagrant (Centos 7 box)
+
+# Requirements
+
+1. Supported Host OS:
+  - Linux
+  - MacOS
+2. Vagrant >= 2.1.5
+3. VirtualBox >= 5.2.18
+4. Supported Guest OS: centos/7 box
+
+# How to Start Lab
+
+```bash
+vagrant up
+```
