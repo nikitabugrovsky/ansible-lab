@@ -19,5 +19,5 @@ vagrant up
 # How to run ansible provisioning from control-node
 
 ```bash
-vagrant ssh control-node -c "ansible-playbook/vagrant/provisioning/ansible/playbook.yml"
+vagrant ssh control-node -c  "ansible-playbook /vagrant/provisioning/ansible/playbook.yml"
 ```
