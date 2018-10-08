@@ -1,5 +1,5 @@
 # ansible-lab
-Ansible Lab: 3 nodes setup (control node + 2 workers) in Vagrant (Centos 7 box)
+Ansible Lab: 3 nodes setup: control node (ansible installed) + 2 workers in Vagrant (Centos 7 box).
 
 # Requirements
 
