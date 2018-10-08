@@ -15,3 +15,9 @@ Ansible Lab: 3 nodes setup (control node + 2 workers) in Vagrant (Centos 7 box)
 ```bash
 vagrant up
 ```
+
+# How to run ansible provisioning from control-node
+
+```bash
+vagrant ssh control-node -c "ansible-playbook/vagrant/provisioning/ansible/playbook.yml"
+```

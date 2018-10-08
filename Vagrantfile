@@ -10,6 +10,7 @@ require_relative 'lib/vagrant'
 work_dir = File.dirname(File.expand_path(__FILE__))
 ssh_keys_dir = "#{work_dir}/ssh"
 shell_provisioning_dir = "#{work_dir}/provisioning/shell"
+ansible_provisioning_dir = "#{work_dir}/provisioning/ansible"
 vagrant_guest_home = "/home/vagrant"
 destination_dir = "#{vagrant_guest_home}/.ssh"
 opts = vagrant_config(work_dir)
@@ -50,4 +51,3 @@ Vagrant.configure("2") do |config|
     end
   end
 end
-
