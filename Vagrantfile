@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.network opts['provider']['virtualbox']['vm']['net'].to_sym, ip: node['ip']
       cfg.vm.provision opts['provisioner'][0]['type'].to_sym, sync_hosts: opts['provisioner'][0]['sync_hosts']
       if node['name'] == 'control-node'
-        cfg.vm.provision opts['provisioner'][1]['type'].to_sym do |s| 
+        cfg.vm.provision opts['provisioner'][1]['type'].to_sym do |s|
           s.path = "#{shell_provisioning_dir}/control_node.sh"
           s.args = worker_nodes
         end

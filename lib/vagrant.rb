@@ -31,6 +31,8 @@ end
 def generate_ssh_keys(ssh_keys_dir, key_name)
   unless File.file?(File.join(ssh_keys_dir, key_name))
     system("ssh-keygen -f #{File.join(ssh_keys_dir, key_name)} -q -N '' -t rsa -C 'vagrant@control-node'")
+    FileUtils.chmod(0600, File.join(ssh_keys_dir, "#{key_name}.pub"))
+    FileUtils.chmod(0600, File.join(ssh_keys_dir, "#{key_name}"))
   end
 end
 
