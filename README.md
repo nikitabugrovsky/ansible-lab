@@ -22,6 +22,3 @@ vagrant up
 ```bash
 vagrant ssh control-node -c  "ansible-playbook /vagrant/provisioning/ansible/playbook.yml"
 ```
-
-# Caveats
-Fix bug with ssh key permission on control-node (0644 -> 0600)
