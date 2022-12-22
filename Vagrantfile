@@ -24,6 +24,7 @@ Vagrant.configure("2") do |config|
 
   config.cache.auto_detect = opts['cache']['auto_detect']
   config.ssh.insert_key = false
+  config.vm.box_download_insecure=true
 
   config.vm.provider :virtualbox do |pr|
     pr.memory = opts['provider']['virtualbox']['vm']['mem']
