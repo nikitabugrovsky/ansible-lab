@@ -7,6 +7,12 @@
 
 require_relative 'lib/vagrant'
 
+if Vagrant.has_plugin?("vagrant-libvirt")
+  # https://github.com/vagrant-libvirt/vagrant-libvirt 
+  provider = :libvirt
+else
+  provider = :virtualbox
+end
 work_dir = File.dirname(File.expand_path(__FILE__))
 ssh_keys_dir = "#{work_dir}/ssh"
 shell_provisioning_dir = "#{work_dir}/provisioning/shell"
@@ -17,24 +23,28 @@ opts = vagrant_config(work_dir)
 check_plugins(opts['plugins'])
 generate_ssh_keys(ssh_keys_dir, 'id_rsa')
 pub_key = File.read(File.join(ssh_keys_dir, 'id_rsa.pub'))
-nodes_array = opts['provider']['virtualbox']['nodes']
+nodes_array = opts['provider'][provider.to_s]['nodes']
 worker_nodes = extract_worker_nodes(nodes_array)
+
+# https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1445
+ENV['VAGRANT_NO_PARALLEL'] = opts['provider'][provider.to_s]['no_parallel']
 
 Vagrant.configure("2") do |config|
 
   config.cache.auto_detect = opts['cache']['auto_detect']
   config.ssh.insert_key = false
 
-  config.vm.provider :virtualbox do |pr|
-    pr.memory = opts['provider']['virtualbox']['vm']['mem']
-    pr.cpus = opts['provider']['virtualbox']['vm']['cpu']
+  config.vm.provider provider do |pr|
+    pr.memory = opts['provider'][provider.to_s]['vm']['mem']
+    pr.cpus = opts['provider'][provider.to_s]['vm']['cpu']
+    pr.qemu_use_session = false if provider == :libvirt
   end
 
   nodes_array.each do |node|
     config.vm.define node['name'] do |cfg|
-      cfg.vm.box = opts['provider']['virtualbox']['vm']['box']
+      cfg.vm.box = opts['provider'][provider.to_s]['vm']['box']
       cfg.vm.hostname = node['hostname']
-      cfg.vm.network opts['provider']['virtualbox']['vm']['net'].to_sym, ip: node['ip']
+      cfg.vm.network opts['provider'][provider.to_s]['vm']['net'].to_sym, ip: node['ip']
       cfg.vm.provision opts['provisioner'][0]['type'].to_sym, sync_hosts: opts['provisioner'][0]['sync_hosts']
       if node['name'] == 'control-node'
         cfg.vm.provision opts['provisioner'][1]['type'].to_sym do |s|
