@@ -23,7 +23,7 @@ def vagrant_config(work_dir)
   @options = {}
   conf_files = Dir.glob("#{work_dir}/conf/*.yaml")
   conf_files.each do |f|
-    @options.merge!(YAML.load_file(f))
+    @options.merge!(YAML.load_file(f, aliases: true))
   end
   @options
 end
