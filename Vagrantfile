@@ -34,6 +34,8 @@ Vagrant.configure("2") do |config|
   config.cache.auto_detect = opts['cache']['auto_detect']
   config.ssh.insert_key = false
 
+  config.vm.synced_folder ".", "/vagrant", type: "sshfs"
+
   config.vm.provider provider do |pr|
     pr.memory = opts['provider'][provider.to_s]['vm']['mem']
     pr.cpus = opts['provider'][provider.to_s]['vm']['cpu']

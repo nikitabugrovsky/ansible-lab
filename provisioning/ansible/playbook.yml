@@ -1,6 +1,17 @@
 ---
 
 - hosts: all
-  gather_facts: false
+  gather_facts: true
+  become: false
   tasks:
     - ping:
+    - name: Show Linux Distribution
+      debug:
+        msg: "{{ ansible_distribution }}"
+    - name: Show Linux Distribution Version
+      debug:
+        msg: "{{ ansible_distribution_version }}"
+    - name: Show Ansible Version
+      debug:
+        msg: "{{ ansible_version.full }}"
+
