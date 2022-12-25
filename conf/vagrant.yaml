@@ -2,9 +2,9 @@
 vms: &vms
   vm:
     cpu: 1
-    mem: 256
+    mem: 1024
     net: 'private_network'
-    box: 'centos/7'
+    box: 'rockylinux/9'
   nodes:
     - name: 'node-0'
       hostname: 'node-0'
