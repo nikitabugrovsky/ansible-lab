@@ -20,6 +20,7 @@ vms: &vms
 plugins:
   - 'vagrant-hosts'
   - 'vagrant-cachier'
+  - 'vagrant-sshfs'
 
 cache:
   auto_detect: true
