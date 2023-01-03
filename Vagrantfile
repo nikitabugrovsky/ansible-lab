@@ -23,8 +23,8 @@ opts = vagrant_config(work_dir)
 check_plugins(opts['plugins'])
 generate_ssh_keys(ssh_keys_dir, 'id_rsa')
 pub_key = File.read(File.join(ssh_keys_dir, 'id_rsa.pub'))
-nodes_array = opts['provider'][provider.to_s]['nodes']
-worker_nodes = extract_worker_nodes(nodes_array)
+nodes_hash = opts['provider'][provider.to_s]['nodes']
+worker_nodes = extract_worker_nodes(nodes_hash)
 
 # https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1445
 ENV['VAGRANT_NO_PARALLEL'] = opts['provider'][provider.to_s]['no_parallel']
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     pr.qemu_use_session = false if provider == :libvirt
   end
 
-  nodes_array.each do |node|
+  nodes_hash.each do |node|
     config.vm.define node['name'] do |cfg|
       cfg.vm.box = opts['provider'][provider.to_s]['vm']['box']
       cfg.vm.hostname = node['hostname']
