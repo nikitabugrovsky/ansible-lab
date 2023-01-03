@@ -23,7 +23,12 @@ def vagrant_config(work_dir)
   @options = {}
   conf_files = Dir.glob("#{work_dir}/conf/*.yaml")
   conf_files.each do |f|
-    @options.merge!(YAML.load_file(f, aliases: true))
+    # https://github.com/ruby/psych/issues/533
+    if Psych::VERSION > '4.0'
+      @options.merge!(YAML.load_file(f, aliases: true))
+    else
+      @options.merge!(YAML.load_file(f))
+    end
   end
   @options
 end
