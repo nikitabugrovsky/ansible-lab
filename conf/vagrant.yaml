@@ -15,7 +15,6 @@ vms: &vms
     - name: 'control-node'
       hostname: 'control-node'
       ip: '10.0.0.10'          
-  no_parallel: 'yes'
 
 plugins:
   - 'vagrant-hosts'
@@ -27,9 +26,11 @@ cache:
 
 provider:
   libvirt:
-    *vms
+    <<: *vms
+    no_parallel: 'yes'
   virtualbox:
-    *vms
+    <<: *vms
+    no_parallel: 'no'
 
 provisioner:
   - type: 'hosts'
