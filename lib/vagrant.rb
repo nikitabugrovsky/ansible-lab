@@ -7,15 +7,19 @@
 require 'yaml'
 
 def check_plugins(required_plugins)
+  plugins_to_install = []
   required_plugins.each do |plugin_name|
     unless Vagrant.has_plugin?(plugin_name)
-      puts '---------- WARNING ----------'
-      puts 'Please install vagrant plugin'
-      puts 'with the following command:'
-      puts "# vagrant plugin install #{plugin_name}"
-      puts '------------ END ------------'
-      exit 0
+      plugins_to_install.append(plugin_name)
     end
+  end
+  unless plugins_to_install.empty?
+    puts '---------- WARNING ----------'
+    puts 'Please install vagrant plugins'
+    puts 'with the following command:'
+    puts "# vagrant plugin install #{plugins_to_install.join(" ")}"
+    puts '------------ END ------------'
+    exit 0
   end
 end
 
