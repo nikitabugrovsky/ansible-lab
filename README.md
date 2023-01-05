@@ -6,6 +6,13 @@ Current setup supports 2 vagrant providers:
 - [virtualbox](https://developer.hashicorp.com/vagrant/docs/providers/virtualbox)
 - [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt)
 
+# Releases
+
+| Release                                                                                        	| Description                                                          	|
+|------------------------------------------------------------------------------------------------	|----------------------------------------------------------------------	|
+| [Rocky Linux 9 Box Complete](https://github.com/nikitabugrovsky/ansible-lab/releases/tag/v2.0) 	| Latest Rocky Linux box release. Requires 1 GB RAM & 1 vCPU per node. 	|
+| [CentOS 7 Box Complete](https://github.com/nikitabugrovsky/ansible-lab/releases/tag/v1.0)      	| Older CentOS 7 box release. Requires 256 MB RAM & 1 vCPU per node.   	|
+
 # Requirements
 
 1. Supported Host OS:
