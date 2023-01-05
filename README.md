@@ -1,3 +1,5 @@
+![CI Pipeline](https://github.com/nikitabugrovsky/ansible-lab/actions/workflows/ci.yml/badge.svg)
+
 # ansible-lab
 Ansible Lab: 3 nodes setup: control node (ansible installed) + 2 workers in Vagrant (Rocky Linux 9 box).
 Current setup supports 2 vagrant providers:
