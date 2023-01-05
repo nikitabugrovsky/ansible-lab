@@ -6,6 +6,20 @@
 
 require 'yaml'
 
+def check_providers(allowed_providers)
+  allowed_providers.each do |ap|
+    if Vagrant.has_plugin?(ap)
+      puts "Provider #{ap} has been found. Proceeding..."
+      provider = :libvirt
+      return provider
+    end
+  end
+  puts 'Provider plugins have not been found.'
+  puts 'Falling back to virtualbox provider.'
+  provider = :virtualbox
+  return provider
+end
+
 def check_plugins(required_plugins)
   plugins_to_install = []
   required_plugins.each do |plugin_name|
@@ -43,6 +57,10 @@ def generate_ssh_keys(ssh_keys_dir, key_name)
     FileUtils.chmod(0600, File.join(ssh_keys_dir, "#{key_name}.pub"))
     FileUtils.chmod(0600, File.join(ssh_keys_dir, "#{key_name}"))
   end
+end
+
+def prepare_ssh_config(ssh_key_dir)
+  FileUtils.chmod(0600, File.join(ssh_key_dir, 'config'))
 end
 
 def extract_worker_nodes(nodes_array)

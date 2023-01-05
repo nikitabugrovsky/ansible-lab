@@ -7,12 +7,6 @@
 
 require_relative 'lib/vagrant'
 
-if Vagrant.has_plugin?("vagrant-libvirt")
-  # https://github.com/vagrant-libvirt/vagrant-libvirt 
-  provider = :libvirt
-else
-  provider = :virtualbox
-end
 work_dir = File.dirname(File.expand_path(__FILE__))
 ssh_keys_dir = "#{work_dir}/ssh"
 shell_provisioning_dir = "#{work_dir}/provisioning/shell"
@@ -20,8 +14,10 @@ ansible_provisioning_dir = "#{work_dir}/provisioning/ansible"
 vagrant_guest_home = "/home/vagrant"
 destination_dir = "#{vagrant_guest_home}/.ssh"
 opts = vagrant_config(work_dir)
+provider = check_providers(opts['providers'])
 check_plugins(opts['plugins'])
 generate_ssh_keys(ssh_keys_dir, 'id_rsa')
+prepare_ssh_config(ssh_keys_dir)
 pub_key = File.read(File.join(ssh_keys_dir, 'id_rsa.pub'))
 nodes_hash = opts['provider'][provider.to_s]['nodes']
 worker_nodes = extract_worker_nodes(nodes_hash)
