@@ -16,6 +16,10 @@ vms: &vms
       hostname: 'control-node'
       ip: '10.0.0.10'          
 
+providers:
+  # virtualbox provider supported out of the box
+  - 'vagrant-libvirt'
+
 plugins:
   - 'vagrant-hosts'
   - 'vagrant-cachier'
